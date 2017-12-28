@@ -1,4 +1,5 @@
 ﻿using Bosch.GLM100C.CommunicationHandler;
+using GLM50.Calculations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,36 @@ namespace GLM50
 {
     public partial class MainForm : Form
     {
+
+        private ICalculationDialog activeCalculationDialog = null;
+
         public MainForm()
         {
             InitializeComponent();
             BTCommunicationBridge.Instance.MeasurementDataReceived += this.Instance_MeasurementDataReceived;
             BTCommunicationBridge.Instance.OnConnectClick += this.Instance_OnConnectClick;
             BTCommunicationBridge.Instance.OnBTDisConnect += this.Instance_OnBTDisConnect;
+            this.calculationsDropDown.Items.Add("Calculations:");
+            this.calculationsDropDown.Items.Add(new CalculationCreator<TriangleCalculation>("Triangle"));
+            this.calculationsDropDown.SelectedIndex = 0;
+            this.calculationsDropDown.SelectedValueChanged += this.CalculationsDropDown_SelectedValueChanged;
+        }
+
+        private void CalculationsDropDown_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var idx = this.calculationsDropDown.SelectedIndex;
+
+            if (idx < 1)
+                return;
+
+            var creator = this.calculationsDropDown.SelectedItem as ICalculationCreator;
+            using (var dialog = creator.CreateInstance())
+            {
+                this.activeCalculationDialog = dialog;
+                dialog.ShowDialog();
+                this.activeCalculationDialog = null;
+            }
+            this.calculationsDropDown.SelectedIndex = 0;
         }
 
         private void Instance_OnBTDisConnect(object sender, EventArgs e)
@@ -53,12 +78,19 @@ namespace GLM50
                 {
                     measuredValue = measuredValue * (float)scaleValueBy.Value;
                     this.measuredValueLabel.Text = measuredValue.ToString();
-                    if (this.sendMeasuredValueCb.Checked)
+                    if (this.activeCalculationDialog != null)
                     {
-                        string format = this.sendMeasuredValueFormat.Text;
-                        bool enter = format.Contains("{ENTER}");
-                        format = format.Replace("{ENTER}", "{1}");
-                        SendKeys.SendWait(String.Format(format, measuredValue, enter ? "{ENTER}" : null));
+                        this.activeCalculationDialog.MeasurementReceived(measuredValue);
+                    }
+                    else
+                    {
+                        if (this.sendMeasuredValueCb.Checked)
+                        {
+                            string format = this.sendMeasuredValueFormat.Text;
+                            bool enter = format.Contains("{ENTER}");
+                            format = format.Replace("{ENTER}", "{1}");
+                            SendKeys.SendWait(String.Format(format, measuredValue, enter ? "{ENTER}" : null));
+                        }
                     }
                 }));
             }
@@ -111,5 +143,6 @@ namespace GLM50
             var dvcId = (string)selected;
             BTCommunicationBridge.Instance.StartCommunication(dvcId);
         }
+
     }
 }

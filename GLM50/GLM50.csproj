@@ -63,6 +63,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\CalculationCreator.cs" />
+    <Compile Include="Calculations\ICalculationCreator.cs" />
+    <Compile Include="Calculations\ICalculationDialog.cs" />
+    <Compile Include="Calculations\TriangleCalculation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calculations\TriangleCalculation.Designer.cs">
+      <DependentUpon>TriangleCalculation.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Calculations\TriangleCalculation.resx">
+      <DependentUpon>TriangleCalculation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

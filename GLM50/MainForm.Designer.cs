@@ -37,6 +37,7 @@
             this.sendMeasuredValueFormat = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.scaleValueBy = new System.Windows.Forms.NumericUpDown();
+            this.calculationsDropDown = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.scaleValueBy)).BeginInit();
             this.SuspendLayout();
             // 
@@ -137,11 +138,21 @@
             0,
             0});
             // 
+            // calculationsDropDown
+            // 
+            this.calculationsDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.calculationsDropDown.FormattingEnabled = true;
+            this.calculationsDropDown.Location = new System.Drawing.Point(229, 222);
+            this.calculationsDropDown.Name = "calculationsDropDown";
+            this.calculationsDropDown.Size = new System.Drawing.Size(130, 21);
+            this.calculationsDropDown.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(367, 270);
+            this.Controls.Add(this.calculationsDropDown);
             this.Controls.Add(this.scaleValueBy);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sendMeasuredValueFormat);
@@ -173,6 +184,7 @@
         private System.Windows.Forms.TextBox sendMeasuredValueFormat;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown scaleValueBy;
+        private System.Windows.Forms.ComboBox calculationsDropDown;
     }
 }
 
