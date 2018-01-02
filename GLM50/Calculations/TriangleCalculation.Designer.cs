@@ -132,7 +132,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "TriangleCalculation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "TriangleCalculation";
+            this.Text = "Triangle calculation";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -84,7 +84,7 @@ namespace GLM50
                     }
                     else
                     {
-                        if (this.sendMeasuredValueCb.Checked)
+                        if (!this.Focused && this.sendMeasuredValueCb.Checked)
                         {
                             string format = this.sendMeasuredValueFormat.Text;
                             bool enter = format.Contains("{ENTER}");

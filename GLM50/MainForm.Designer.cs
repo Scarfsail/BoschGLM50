@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.getListOfDevicesBtn = new System.Windows.Forms.Button();
             this.measuredValueLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
@@ -163,6 +164,7 @@
             this.Controls.Add(this.measuredValueLabel);
             this.Controls.Add(this.getListOfDevicesBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
